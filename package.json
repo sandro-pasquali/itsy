@@ -1,0 +1,20 @@
+{
+  "name": "itsy",
+  "version": "1.0.1",
+  "description": "A microservice architecture",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zeromq",
+    "microservice"
+  ],
+  "author": "sandro pasquali <spasquali@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-uuid": "^1.4.1",
+    "uuid": "^2.0.1",
+    "zmq": "^2.8.0"
+  }
+}
