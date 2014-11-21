@@ -10,11 +10,19 @@
     "zeromq",
     "microservice"
   ],
-  "author": "sandro pasquali <spasquali@gmail.com>",
+  "author": "Sandro Pasquali <spasquali@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "node-uuid": "^1.4.1",
     "uuid": "^2.0.1",
     "zmq": "^2.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sandro-pasquali/itsy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sandro-pasquali/itsy/issues"
+  },
+  "homepage": "https://github.com/sandro-pasquali/itsy"
 }
