@@ -1,26 +1,84 @@
-var itsy = require('./lib');
+var Promise = require('bluebird');
 
-var port = 'tcp://127.0.0.1:12345';
+var Itsy = require('./lib');
+var itsy = Itsy('tcp://127.0.0.1:12345');
 
-var publisher = new itsy.Publisher('serviceName', port);
-var service = new itsy.Subscriber('serviceName', port);
+itsy.subscribe('/some/route')
 
-service
-	.fulfill('a', 'b')
-	.using(function(cb) {
-		this.a = "AAAAAA!";
-		cb(this);
+	//	Use more than one handler to fulfill a request.
+	//	The second handler receives the response of the first
+	//	handler.
+	//
+	.fulfill('a')
+	.use(function(cb) {
+		//	You can change properties of the call package -- it is a copy.
+		//
+		this.d = 22
+		cb("aaaa");
 	})
-	.using(function(cb) {
-		this.b = "BBBBB!";
-		cb(this);
+	.use(function(cb) {
+		cb("final result");
+	})
+	
+itsy.subscribe('/some/route2')
+
+	//	Fullfill any request with a null #a
+	//
+	.fulfill('a')
+	.use(function(cb) {
+		cb("final result 2");
+	})
+	
+	//	Fulfill any request passed to this topic
+	//
+	.fulfill()
+	.use(function(cb) {
+		cb("final result FOoOOOOOOOOOOoO");
 	})
 
-publisher.send({
+itsy.send('/some/route', {
 	a : null,
-	b : null,
 	c : "aaaa",
 	d : "bbbb"
-}, function(fulfilledObject) {
+})
+.then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+	return new Promise(function(resolve, reject) {
+		setTimeout(function() {
+			resolve('eventually, this was resolved')
+		}, 1000)
+	})
+})
+.then(function(last) {
+	console.log(last)
+})
+.then(function(res, boo) {
+	return itsy.send('/some/route', {
+		a : null,
+		c : "cccc",
+		d : "dddd"
+	})
+})
+.then(function(last) {
+	console.log("A chained call result: ", last);
+})
+.catch(TypeError, function(err) {
+	console.log("type", err);
+})
+
+
+itsy.send('/some/route2', {
+	a : null,
+	c : "x xxx xx",
+	d : "yyyyyy"
+})
+.then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+});
+
+itsy.send('/some/route2', {
+	c : "xxxxxx2",
+	d : "yyyyyy2"
+}).then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
 });

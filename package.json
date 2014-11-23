@@ -1,6 +1,6 @@
 {
   "name": "itsy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A microservice architecture",
   "main": "index",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "Sandro Pasquali <spasquali@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^2.3.11",
     "node-uuid": "^1.4.1",
     "uuid": "^2.0.1",
     "zmq": "^2.8.0"
