@@ -1,0 +1,16 @@
+{
+  "name": "solveForA",
+  "version": "1.0.0",
+  "description": "solves for a",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --require test/helpers/config.js --reporter spec"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1"
+  }
+}

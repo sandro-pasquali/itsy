@@ -1,6 +1,6 @@
 {
   "name": "itsy",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A microservice architecture",
   "main": "index",
   "scripts": {
