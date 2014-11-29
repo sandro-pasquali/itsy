@@ -1,8 +1,7 @@
 var Promise = require('bluebird');
-
 var Itsy = require('./lib');
+
 var itsy = Itsy('tcp://127.0.0.1:12345');
-var itsy2 = Itsy('tcp://127.0.0.1:12356');
 
 itsy.receive('/some/route')
 
@@ -13,28 +12,24 @@ itsy.receive('/some/route')
 	.fulfill('a')
 	.use(function(cb) {
 		//	You can change properties of the call package -- it is a copy.
+		//	This 'blackboard' is `this` in subsequent #use calls
 		//
-		this.useThisAsFinal = 123;
+		this.useThisAsFinal = 'used as final';
 		cb("aaaa");
 	})
 	.use(function(cb) {
-		cb(this.useThisAsFinal);
+		this.$send('/some/route', {
+			w: null,
+			ww: 'woot'
+		})
+		.then(function(fulfilledObject) {
+			console.log("Fulfilled :", fulfilledObject);
+			cb(this.useThisAsFinal)
+		}.bind(this))
 	})
-	
-itsy.receive('/some/route2')
-
-	//	Fullfill any request with a null #a
-	//
-	.fulfill('a')
+	.fulfill('w')
 	.use(function(cb) {
-		cb("final result 2");
-	})
-	
-	//	Fulfill any request passed to this topic
-	//
-	.fulfill()
-	.use(function(cb) {
-		cb("final result FOoOOOOOOOOOOoO");
+		cb(".....WWW.....")
 	})
 
 itsy.profile('test');
@@ -48,7 +43,7 @@ itsy.send('/some/route', {
 	return new Promise(function(resolve, reject) {
 		setTimeout(function() {
 			resolve('eventually, this was resolved')
-		}, 2000)
+		}, 1000)
 	})
 })
 .then(function(last) {
@@ -73,12 +68,47 @@ itsy.send('/some/route', {
 })
 
 
+itsy.receive('/some/route2')
+
+	//	Fullfill any request with a null #a
+	//
+	.fulfill('a')
+	.use(function(cb) {
+		cb("This is the A result");
+	})
+	.fulfill('b')
+	.use(function(cb) {
+		cb("This is the B result");
+	})	
+		
+	.fulfill('f')
+	.use(function(cb) {
+		cb("FFF-->F")
+	})
+	
+	//	Fulfill any request passed to this topic
+	//
+	.fulfill()
+	.use(function(cb) {
+		cb("final result FOoOOOOOOOOOOoO");
+	})
+
 itsy.send('/some/route2', {
 	a : null,
+	b : null,
+	f : null,
 	c : "x xxx xx",
 	d : "yyyyyy"
 })
 .then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+});
+
+itsy.send('/some/route2', {
+	a : null,
+	c : "xxxxxx2",
+	d : "yyyyyy2"
+}).then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
 });
 
@@ -89,34 +119,3 @@ itsy.send('/some/route2', {
 	console.log("Fulfilled : ", fulfilledObject);
 });
 
-
-
-
-
-
-itsy2.receive('/some/route')
-	.fulfill('a')
-	.use(function(cb) {
-		cb("aaaa@@@@");
-	})
-	.use(function(cb) {
-		cb("final result");
-	})
-
-itsy2.send('/some/route', {
-	a : null,
-	c : "@@@@@@@",
-	d : "$$$$$$$"
-})
-.then(function(fulfilledObject) {
-	console.log("Fulfilled : ", fulfilledObject);
-})
-
-itsy2.send('/some/route', {
-	a : null,
-	c : "!!!!!!!!!!",
-	d : "%%%%%%%%%"
-})
-.then(function(fulfilledObject) {
-	console.log("Fulfilled : ", fulfilledObject);
-})
