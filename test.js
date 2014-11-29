@@ -18,6 +18,10 @@ itsy.receive('/some/route')
 		cb("aaaa");
 	})
 	.use(function(cb) {
+		//	While you can always use <itsy instance>.send(), when you don't 
+		//	have access to the instance ref within #use (such as when this 
+		//	handler is exported by a module) use this.$send
+		//
 		this.$send('/some/route', {
 			w: null,
 			ww: 'woot'
@@ -119,3 +123,12 @@ itsy.send('/some/route2', {
 	console.log("Fulfilled : ", fulfilledObject);
 });
 
+//	This will expire (never resolves as there is no matching service)
+//
+itsy.send('/frig', {
+	wtf : "frig"
+}).then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+}).catch(function(err) {
+	console.log(err);
+})
