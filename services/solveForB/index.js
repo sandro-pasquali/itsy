@@ -1,3 +1,3 @@
-module.exports = function(cb) {
-	cb("second (b) @@@@");
-}
+module.exports = require('../')(function(cb) {
+	cb("second (b) @@@*******@");
+});

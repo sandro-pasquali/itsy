@@ -1,3 +1,6 @@
-module.exports = function(cb) {
-	cb("first (a) @@@@");
-}
+module.exports = require('../')(function(cb) {
+	cb("first (a) @@@!!!!@");
+});
+
+
+

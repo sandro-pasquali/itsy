@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var Itsy = require('./lib');
+var Itsy = require('../lib');
 
 var itsy = Itsy('tcp://127.0.0.1:12345');
 
@@ -36,7 +36,7 @@ itsy.receive('/some/route')
 		cb(".....WWW.....")
 	})
 
-itsy.profile('test');
+itsy.profile('*test exec time*');
 itsy.send('/some/route', {
 	a : null,
 	c : "aaaa",
@@ -65,7 +65,7 @@ itsy.send('/some/route', {
 })
 .then(function(last) {
 	console.log("A chained call result: ", last);
-	itsy.profile('test');
+	itsy.profile('*test exec time*');
 })
 .catch(TypeError, function(err) {
 	console.log("type", err);
@@ -122,6 +122,7 @@ itsy.send('/some/route2', {
 }).then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
 });
+
 
 //	This will expire (never resolves as there is no matching service)
 //

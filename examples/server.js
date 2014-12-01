@@ -1,8 +1,8 @@
-var Itsy = require('./lib');
+var Itsy = require('../lib');
 
 //	Use modules for a clean organizational structure
 //
-var itsy = Itsy('tcp://127.0.0.1:12356');
+var itsy = Itsy('tcp://127.0.0.1:12345');
 
 itsy.receive('both/a/and/b')
 	.fulfill('a')
@@ -10,24 +10,26 @@ itsy.receive('both/a/and/b')
 	.fulfill('b')
 	.use('services/solveForB')
 	
+var port = process.argv[3] || 8000;
+var host = process.argv[2] || '127.0.0.1';
 
 itsy.send('both/a/and/b', {
 	a : null,
 	b : null,
-	c : "@@@@@@@",
-	d : "$$$$$$$"
+	c : "ccccccc"
 })
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
 })
 
-itsy.http({
-	port : 8080,
-	host : '69.41.161.46',
+itsy.serve({
+	port : port,
+	host : host,
 	backlog: 1024,
 	onReady : function() {
 		console.log('server ready');
 	}
 })
 
-// curl --data "a=&b=&c=ccccccc" http://69.41.161.46:8080/both/a/and/b
+console.log('\n\n** Serving http://' + host + ':' + port);
+console.log('Try > curl --data "a=&b=&c=ccccccc" http://' + host + ':' + port + '/both/a/and/b\n\n');
