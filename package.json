@@ -13,14 +13,13 @@
   "author": "Sandro Pasquali <spasquali@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.3.11",
+    "bluebird": "*",
     "joi": "^4.9.0",
-    "lodash": "^2.4.1",
-    "node-uuid": "^1.4.1",
+    "lodash": "*",
+    "node-uuid": "*",
     "pm2": "^0.12.1",
-    "uuid": "^2.0.1",
-    "winston": "^0.8.3",
-    "zmq": "^2.8.0"
+    "winston": "*",
+    "zmq": "*"
   },
   "repository": {
     "type": "git",

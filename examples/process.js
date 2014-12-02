@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var Itsy = require('./lib');
+var Itsy = require('../lib');
 
 //	Use modules for a clean organizational structure
 //
@@ -11,15 +11,25 @@ var itsy = Itsy({
 itsy.receive('both/a/and/b')
 	.fulfill('a')
 	.use('services/solveForA')
-	//.fulfill('b')
-	//.use('services/solveForB')
+	.fulfill('b')
+	.use('services/solveForB')
 
 
 itsy.send('both/a/and/b', {
 	a : null,
-	//b : null,
+	b : null,
 	c : "cccccffffcc"
 })
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
+	itsy.profile('foo');
+	itsy.send('both/a/and/b', {
+		a : null,
+		b : null,
+		c : "cccccffffcc"
+	})
+	.then(function(fulfilledObject) {
+		console.log("Fulfilled : ", fulfilledObject);
+		itsy.profile('foo');
+	})
 })
