@@ -14,11 +14,10 @@ itsy.receive('both/a/and/b')
 	.fulfill('b')
 	.use('services/solveForB')
 
-
 itsy.send('both/a/and/b', {
 	a : null,
 	b : null,
-	c : "cccccffffcc"
+	c : "the first one"
 })
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
@@ -26,10 +25,29 @@ itsy.send('both/a/and/b', {
 	itsy.send('both/a/and/b', {
 		a : null,
 		b : null,
-		c : "cccccffffcc"
+		c : "subprocess to first one"
 	})
 	.then(function(fulfilledObject) {
 		console.log("Fulfilled : ", fulfilledObject);
 		itsy.profile('foo');
 	})
 })
+
+/*
+
+
+itsy.receive('another/a/and/b')
+	.fulfill('a')
+	.use('services/solveForA')
+	.fulfill('b')
+	.use('services/solveForB')
+
+itsy.send('another/a/and/b', {
+	a : null,
+	b : null,
+	c : "the other one"
+})
+.then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+})
+*/
