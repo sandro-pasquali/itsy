@@ -14,7 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "*",
-    "callsite": "^1.0.0",
     "joi": "^4.9.0",
     "lodash": "*",
     "node-uuid": "*",
