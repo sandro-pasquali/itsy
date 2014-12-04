@@ -5,7 +5,16 @@ var Itsy = require('../lib');
 //
 var itsy = Itsy({
 	publisher : 'tcp://127.0.0.1:12345',
-	router : 'tcp://127.0.0.1:12346'
+	router : 'tcp://127.0.0.1:12346',
+	onServiceReady : function(topic, key, pid) {
+	
+	},
+	onServiceSubscribed : function(topic, key, pid) {
+	
+	},
+	onServiceDuplicate : function(topic, key) {
+	
+	}
 });
 
 itsy.receive('both/a/and/b')
@@ -32,7 +41,6 @@ itsy.send('both/a/and/b', {
 		itsy.profile('foo');
 	})
 })
-
 
 itsy.receive('another/a/and/b')
 	.fulfill('a')

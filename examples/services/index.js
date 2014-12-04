@@ -46,7 +46,12 @@ module.exports = function(main) {
 		});
 	}.bind(sub);
 	
-	dealer.send('SERVICE_READY ' + initTopic + ' ' + initKey);
+	dealer.send([
+		'SERVICE_READY',
+		initTopic,
+		initKey,
+		process.pid
+	].join(' '));
 	
 	//	The "RPC" gateway that router can use to communicate with 
 	//	service processes.
@@ -59,7 +64,12 @@ module.exports = function(main) {
 				//	1:topic, 2:key
 				//
 				addSubscription(args[1], args[2]);
-				dealer.send('SERVICE_SUBSCRIBED ' + args[1] + ' ' + args[2] + ' ' + process.pid);
+				dealer.send([
+					'SERVICE_SUBSCRIBED',
+					args[1],
+					args[2],
+					process.pid
+				].join(' '));
 			break;
 			
 			default:
