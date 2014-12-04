@@ -33,8 +33,6 @@ itsy.send('both/a/and/b', {
 	})
 })
 
-/*
-
 
 itsy.receive('another/a/and/b')
 	.fulfill('a')
@@ -50,4 +48,4 @@ itsy.send('another/a/and/b', {
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
 })
-*/
+
