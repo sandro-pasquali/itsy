@@ -1,6 +1,6 @@
 {
   "name": "itsy",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A microservice architecture",
   "main": "index",
   "scripts": {
@@ -15,13 +15,13 @@
   "dependencies": {
     "bluebird": "*",
     "colors": "*",
-    "fs-extra": "*",
+    "fs-extra": "^0.12.0",
     "joi": "^4.9.0",
     "lodash": "*",
     "node-uuid": "*",
     "pm2": "^0.12.1",
-    "winston": "*",
-    "zmq": "*"
+    "winston": "^0.8.3",
+    "zmq": "^2.8.0"
   },
   "repository": {
     "type": "git",

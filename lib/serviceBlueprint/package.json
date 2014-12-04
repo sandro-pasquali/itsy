@@ -13,8 +13,8 @@
     "mocha": "^2.0.1",
     "sinon": "^1.12.1"
   },
+  "repository": {},
   "dependencies": {
-    "zmq": "*"
-  },
-  "repository": {}
+    "zmq": "^2.8.0"
+  }
 }
