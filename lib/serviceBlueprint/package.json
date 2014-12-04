@@ -1,12 +1,12 @@
 {
-  "name": "solveForB",
+  "name": "serviceBlueprint",
   "version": "1.0.0",
-  "description": "solves for b",
-  "main": "index.js",
+  "description": "Itsy service",
+  "main": "service.js",
   "scripts": {
     "test": "mocha test --require test/helpers/config.js --reporter spec"
   },
-  "author": "",
+  "author": "Sandro Pasquali <spasquali@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "chai": "^1.10.0",
@@ -14,6 +14,7 @@
     "sinon": "^1.12.1"
   },
   "dependencies": {
-    "zmq": "^2.8.0"
-  }
+    "zmq": "*"
+  },
+  "repository": {}
 }

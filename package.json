@@ -14,6 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "bluebird": "*",
+    "colors": "*",
+    "fs-extra": "*",
     "joi": "^4.9.0",
     "lodash": "*",
     "node-uuid": "*",
