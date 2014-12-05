@@ -8,13 +8,11 @@
   },
   "author": "Sandro Pasquali <spasquali@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "chai": "^1.10.0",
     "mocha": "^2.0.1",
-    "sinon": "^1.12.1"
-  },
-  "repository": {},
-  "dependencies": {
+    "sinon": "^1.12.1",
     "zmq": "^2.8.0"
-  }
+  },
+  "repository": {}
 }
