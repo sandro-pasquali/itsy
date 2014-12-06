@@ -1,5 +1,6 @@
 var Promise = require('bluebird');
 var Itsy = require('../lib');
+var timer = require('microtimer');
 
 //	Use modules for a clean organizational structure
 //
@@ -30,7 +31,7 @@ itsy.send('both/a/and/b', {
 })
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
-	itsy.profile('foo');
+	timer.profile('foo');
 	itsy.send('both/a/and/b', {
 		a : null,
 		b : null,
@@ -38,7 +39,7 @@ itsy.send('both/a/and/b', {
 	})
 	.then(function(fulfilledObject) {
 		console.log("Fulfilled : ", fulfilledObject);
-		itsy.profile('foo');
+		timer.profile('foo');
 	})
 })
 
