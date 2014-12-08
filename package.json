@@ -19,8 +19,7 @@
     "joi": "^4.9.0",
     "lodash": "*",
     "microtimer": "*",
-    "node-uuid": "*",
-    "pm2": "^0.12.1",
+    "pm2": "*",
     "zmq": "^2.8.0"
   },
   "repository": {

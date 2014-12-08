@@ -18,27 +18,36 @@ var itsy = Itsy({
 	}
 });
 
-itsy.receive('both/a/and/b')
-	.fulfill('a')
-	.use('services/solveForA')
-	.fulfill('b')
-	.use('services/solveForB')
+//
+//	MONGO
+//
 
-itsy.send('both/a/and/b', {
-	a : null,
-	b : null,
-	c : "the first one"
+itsy.receive('config/get')
+	.fulfill('values')
+	.use('services/config/get')
+
+itsy.send('config/get', {
+	fields : [
+		'firstname',
+		'lastname'
+	],
+	values : null
 })
 .then(function(fulfilledObject) {
 	console.log("Fulfilled : ", fulfilledObject);
-	timer.set('tester');
-	itsy.send('both/a/and/b', {
-		a : null,
-		b : null,
-		c : "subprocess to first one"
-	})
-	.then(function(fulfilledObject) {
-		console.log("Fulfilled : ", fulfilledObject);
-		timer.get('tester');
-	})
 })
+
+itsy.receive('config/set')
+	.fulfill()
+	.use('services/config/set')
+
+itsy.send('config/set', {
+	fields : {
+		firstname : "sandro",
+		lastname : "pasquali"
+	}
+})
+.then(function(fulfilledObject) {
+	console.log("Fulfilled : ", fulfilledObject);
+})
+

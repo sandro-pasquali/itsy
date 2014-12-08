@@ -3,8 +3,8 @@ var Itsy = require('../lib');
 //	Use modules for a clean organizational structure
 //
 var itsy = Itsy({
-	publisher : 'tcp://127.0.0.1:12345',
-	router : 'tcp://127.0.0.1:12346'
+	publisherUri : 'tcp://127.0.0.1:12345',
+	routerUri : 'tcp://127.0.0.1:12346'
 });
 
 itsy.receive('both/a/and/b')
