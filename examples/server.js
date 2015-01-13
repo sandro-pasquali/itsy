@@ -16,15 +16,6 @@ itsy.receive('both/a/and/b')
 var port = process.argv[3] || 8000;
 var host = process.argv[2] || '127.0.0.1';
 
-itsy.send('both/a/and/b', {
-	a : null,
-	b : null,
-	c : "ccccccc"
-})
-.then(function(fulfilledObject) {
-	console.log("Fulfilled : ", fulfilledObject);
-})
-
 itsy.serve({
 	port : port,
 	host : host,
